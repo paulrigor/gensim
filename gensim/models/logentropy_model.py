@@ -89,6 +89,7 @@ class LogEntropyModel(interfaces.TransformationABC):
         logger.info("calculating counts")
         glob_freq = {}
         glob_num_words, doc_no = 0, -1
+        doc_no = 0
         for doc_no, bow in enumerate(corpus):
             if doc_no % 10000 == 0:
                 logger.info("PROGRESS: processing document #%i", doc_no)
@@ -106,6 +107,7 @@ class LogEntropyModel(interfaces.TransformationABC):
             self.n_docs, len(glob_freq), self.n_words
         )
         logger.debug('iterating over corpus')
+        doc_no2 = 0
         for doc_no2, bow in enumerate(corpus):
             for key, freq in bow:
                 p = (float(freq) / glob_freq[key]) * math.log(float(freq) / glob_freq[key])
